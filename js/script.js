@@ -1,14 +1,19 @@
 
-const getData = async () => {
+const getData = async (dataLimit) => {
     const url = `https://openapi.programming-hero.com/api/ai/tools`;
     const res = await fetch(url);
     const data = await res.json();
-    displayPhones(data.data.tools);
+    displayPhones(data.data.tools, dataLimit);
 }
-getData();
+getData(6);
 
-const displayPhones = phones =>{
+const displayPhones = (phones, dataLimit) =>{
     const phoneContainer = document.getElementById('phone-container');
+
+    //Show first 6 Datas
+    if(dataLimit && phones.length > 6){
+        phones = phones.slice(0, 6);
+    }
     
     phones.forEach( phone =>{
         const features = phone.features;

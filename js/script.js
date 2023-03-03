@@ -7,22 +7,22 @@ const getData = async (dataLimit) => {
 }
 getData(6);
 
-const displayPhones = (phones, dataLimit) =>{
-    const phoneContainer = document.getElementById('phone-container');
+const displayPhones = (systemData, dataLimit) =>{
+    const systemContainer = document.getElementById('phone-container');
 
     //Show first 6 Datas
-    if(dataLimit && phones.length > 6){
-        phones = phones.slice(0, 6);
+    if(dataLimit && systemData.length > 6){
+        systemData = systemData.slice(0, 6);
     }
     
-    phones.forEach( phone =>{
-        // console.log(phone)
-        const features = phone.features;
-        const phoneDetail = document.createElement('div');
-        phoneDetail.classList.add('col');
-        phoneDetail.innerHTML = `
+    systemData.forEach( system =>{
+        // console.log(system)
+        const features = system.features;
+        const systemDetails = document.createElement('div');
+        systemDetails.classList.add('col');
+        systemDetails.innerHTML = `
         <div class="card h-100 p-3">
-        <img src="${phone.image}" class="card-img-top rounded-4 card-img" alt="...">
+        <img src="${system.image}" class="card-img-top rounded-4 card-img" alt="...">
         <div class="card-body">
           <h5 class="card-title fw-bold">Features</h5>
           <div>
@@ -33,24 +33,24 @@ const displayPhones = (phones, dataLimit) =>{
         </div>
         <div class="card-footer d-flex justify-content-between align-items-center">
             <div>
-                <h5 class="card-title fw-bold">${phone.name}</h5>
-                <p class="card-text"><span>📆</span> ${phone.published_in}</p>
+                <h5 class="card-title fw-bold">${system.name}</h5>
+                <p class="card-text"><span>📆</span> ${system.published_in}</p>
             </div>
             <div>
-                <button type="button" class="btn btn-outline-danger rounded-5"> &rarr;</button>
+                <button onClick="showSystemDetails('${system.id}')" type="button" class="btn btn-outline-danger rounded-5" data-bs-toggle="modal" data-bs-target="#systemModal"> &rarr;</button>
             </div>
         </div>
       </div>
 
         `
-        phoneContainer.appendChild(phoneDetail);
+        systemContainer.appendChild(systemDetails);
     })
 }
 
 // It'll show All the items
 document.getElementById('btn-more').addEventListener('click', function(){
-    const phoneContainer = document.getElementById('phone-container');
-    phoneContainer.innerHTML = '';
+    const systemContainer = document.getElementById('phone-container');
+    systemContainer.innerHTML = '';
     const btnMore = document.getElementById('btn-more');
     btnMore.classList.add('d-none');
     getData();
@@ -58,8 +58,8 @@ document.getElementById('btn-more').addEventListener('click', function(){
 
 // It'll show sorted datas by date:
 document.getElementById('btn-sort').addEventListener('click', function(){
-    const phoneContainer = document.getElementById('phone-container');
-    phoneContainer.innerHTML = '';
+    const systemContainer = document.getElementById('phone-container');
+    systemContainer.innerHTML = '';
 
     const getData = async (dataLimit) => {
         const url = `https://openapi.programming-hero.com/api/ai/tools`;
@@ -73,3 +73,15 @@ document.getElementById('btn-sort').addEventListener('click', function(){
     getData();
 
 })
+
+// It'll show all the systmes details in a modal: 
+const showSystemDetails = async (id) =>{
+    const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    console.log(data.data);
+}
+
+const displaySystemDetails = system =>{
+
+}

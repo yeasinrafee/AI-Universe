@@ -16,8 +16,8 @@ const displayPhones = (phones, dataLimit) =>{
     }
     
     phones.forEach( phone =>{
+        // console.log(phone)
         const features = phone.features;
-        console.log(phone)
         const phoneDetail = document.createElement('div');
         phoneDetail.classList.add('col');
         phoneDetail.innerHTML = `
@@ -54,4 +54,22 @@ document.getElementById('btn-more').addEventListener('click', function(){
     const btnMore = document.getElementById('btn-more');
     btnMore.classList.add('d-none');
     getData();
+})
+
+// It'll show sorted datas by date:
+document.getElementById('btn-sort').addEventListener('click', function(){
+    const phoneContainer = document.getElementById('phone-container');
+    phoneContainer.innerHTML = '';
+
+    const getData = async (dataLimit) => {
+        const url = `https://openapi.programming-hero.com/api/ai/tools`;
+        const res = await fetch(url);
+        const data = await res.json();
+        const sorted = data.data.tools.sort((a, b) => new Date(a.published_in) - new Date(b.published_in));
+        displayPhones(sorted, dataLimit);
+    }
+    const btnMore = document.getElementById('btn-more');
+    btnMore.classList.add('d-none');
+    getData();
+
 })

@@ -46,3 +46,12 @@ const displayPhones = (phones, dataLimit) =>{
         phoneContainer.appendChild(phoneDetail);
     })
 }
+
+// It'll show All the items
+document.getElementById('btn-more').addEventListener('click', function(){
+    const phoneContainer = document.getElementById('phone-container');
+    phoneContainer.innerHTML = '';
+    const btnMore = document.getElementById('btn-more');
+    btnMore.classList.add('d-none');
+    getData();
+})

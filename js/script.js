@@ -1,9 +1,11 @@
 
 const getData = async (dataLimit) => {
+    loader(true);
     const url = `https://openapi.programming-hero.com/api/ai/tools`;
     const res = await fetch(url);
     const data = await res.json();
     displayPhones(data.data.tools, dataLimit);
+    loader(false);
 }
 getData(6);
 
@@ -62,11 +64,13 @@ document.getElementById('btn-sort').addEventListener('click', function(){
     systemContainer.innerHTML = '';
 
     const getData = async (dataLimit) => {
+        loader(true);
         const url = `https://openapi.programming-hero.com/api/ai/tools`;
         const res = await fetch(url);
         const data = await res.json();
         const sorted = data.data.tools.sort((a, b) => new Date(a.published_in) - new Date(b.published_in));
         displayPhones(sorted, dataLimit);
+        loader(false);
     }
     const btnMore = document.getElementById('btn-more');
     btnMore.classList.add('d-none');
@@ -76,10 +80,12 @@ document.getElementById('btn-sort').addEventListener('click', function(){
 
 // It'll show all the systmes details in a modal: 
 const showSystemDetails = async (id) =>{
+    loader(true);
     const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
     const res = await fetch(url);
     const data = await res.json();
     console.log(data.data);
+    loader(false);
     displaySystemDetails(data.data);
 }
 
@@ -141,12 +147,16 @@ const displaySystemDetails = system =>{
     </div>
     
     `
-    // const imgBox = document.getElementById('img-box');
-    // const accuracy = document.createElement('p');
-    // accuracy.textContent = ``;
-    // imgBox.appendChild(accuracy);
-
     modalBody.appendChild(div);
+    loader(false);
 }
 
-
+// Loader function 
+function loader (isLoading){
+    const loader = document.getElementById('loader');
+    if(isLoading){
+      loader.classList.remove('d-none');
+    }else{
+      loader.classList.add('d-none');
+    }
+  }

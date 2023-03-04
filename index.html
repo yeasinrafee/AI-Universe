@@ -51,6 +51,17 @@
         </div>
       </section>
 
+      <section id="loader" class="d-none">
+        <div
+          style="height: 400px"
+          class="align-items-center d-flex justify-content-center"
+        >
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </section>
+
       <!-- Modal section -->
       <section>
       <!-- Modal -->
@@ -63,16 +74,16 @@
       >
         <div class="modal-dialog modal-dialog-centered modal-xl">
           <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header position-relative">
               <h1 class="modal-title fs-5" id="systemModalLabel">
                 Details
               </h1>
-              <button
+              <div
                 type="button"
                 class="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
-              ></button>
+              ></div>
             </div>
             <div id="modal-body" class="modal-body">
                 

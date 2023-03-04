@@ -11,9 +11,12 @@
 .img-box{
     height: 490px;
     width: 487px;
+    border: 1px solid #E7E7E7;
+    border-radius: 16px;
 }
+
 .price-box p{
-    background-color: white;
+    background-color: #ffffff;
     padding: 22px 26px;
     gap: 16px;
 }
@@ -28,4 +31,12 @@
 .red{
     color: #EB5757;
     font-weight: bold;
+}
+.accuracy{
+    background: #EB5757;
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 3px 7px;
+    top: 55px;
+    right: 55px;
 }

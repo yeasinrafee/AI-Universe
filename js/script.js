@@ -131,13 +131,21 @@ const displaySystemDetails = system =>{
             </div>
         </div>
     </div>
-    <div class="img-box text-center p-5 rounded-3 position-relative">
+    <div id="img-box" class="img-box text-center p-5 rounded-3 position-relative">
+        ${system.accuracy? `
+            <p class="position-absolute accuracy">${system.accuracy.score * 100}% accuracy</p>
+        `: ''}
         <img class="img-fluid mb-4 rounded-3" src="${system.image_link[0]}" alt="">
         <h5 class="mb-4 fw-bolder">${system.input_output_examples[0].input}</h5>
         <p class="mb-4">${system.input_output_examples[0].output}</p>
     </div>
     
     `
+    // const imgBox = document.getElementById('img-box');
+    // const accuracy = document.createElement('p');
+    // accuracy.textContent = ``;
+    // imgBox.appendChild(accuracy);
+
     modalBody.appendChild(div);
 }
 

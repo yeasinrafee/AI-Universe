@@ -1,15 +1,16 @@
-
+// Fetch Data (Using api) function
 const getData = async (dataLimit) => {
     loader(true);
     const url = `https://openapi.programming-hero.com/api/ai/tools`;
     const res = await fetch(url);
     const data = await res.json();
-    displayPhones(data.data.tools, dataLimit);
+    displayAISystems(data.data.tools, dataLimit);
     loader(false);
 }
 getData(6);
 
-const displayPhones = (systemData, dataLimit) =>{
+// Display All AI Systems
+const displayAISystems = (systemData, dataLimit) =>{
     const systemContainer = document.getElementById('phone-container');
 
     //Show first 6 Datas
@@ -18,7 +19,6 @@ const displayPhones = (systemData, dataLimit) =>{
     }
     
     systemData.forEach( system =>{
-        console.log(system)
         const features = system.features;
         const systemDetails = document.createElement('div');
         systemDetails.classList.add('col');
@@ -69,7 +69,7 @@ document.getElementById('btn-sort').addEventListener('click', function(){
         const res = await fetch(url);
         const data = await res.json();
         const sorted = data.data.tools.sort((a, b) => new Date(a.published_in) - new Date(b.published_in));
-        displayPhones(sorted, dataLimit);
+        displayAISystems(sorted, dataLimit);
         loader(false);
     }
     const btnMore = document.getElementById('btn-more');
@@ -88,6 +88,7 @@ const showSystemDetails = async (id) =>{
     displaySystemDetails(data.data);
 }
 
+// Display all the details in the Modal
 const displaySystemDetails = system =>{
     const modalBody = document.getElementById('modal-body');
     modalBody.innerHTML = '';
@@ -99,9 +100,7 @@ const displaySystemDetails = system =>{
     div.classList.add('align-items-center');
     div.classList.add('py-3');
     div.classList.add('px-5');
-
     div.innerHTML = `
-    
         <div class="text-box p-5 rounded-3">
         <h5 class="fw-bolder mb-3">${system.description}</h5>
         <div class="price-box d-flex justify-content-around align-items-center text-center">
@@ -127,13 +126,14 @@ const displaySystemDetails = system =>{
             </div>
             <div class="integraitons">
                 <h5>Integrations</h5>
-                    ${system.integrations? `
+                    ${system.integrations?
+                    `
                         <ul>
                             <li>${system.integrations[0]}</li>
                             <li>${system.integrations[1]}</li>
                             <li>${system.integrations[2]}</li>
-                        </ul>
-                    `: 'No data found'}
+                        </ul>`
+                    : 'No data found'}
             </div>
         </div>
     </div>
@@ -145,7 +145,6 @@ const displaySystemDetails = system =>{
         <h5 class="mb-4 fw-bolder">${system.input_output_examples[0].input}</h5>
         <p class="mb-4">${system.input_output_examples[0].output}</p>
     </div>
-    
     `
     modalBody.appendChild(div);
     loader(false);

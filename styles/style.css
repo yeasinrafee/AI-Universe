@@ -2,3 +2,30 @@
 .card-img{
     height: 300px;
 }
+.text-box{
+    height: 490px;
+    width: 487px;
+    background: rgba(235, 87, 87, 0.05);
+    border: 1px solid #EB5757;
+}
+.img-box{
+    height: 490px;
+    width: 487px;
+}
+.price-box p{
+    background-color: white;
+    padding: 22px 26px;
+    gap: 16px;
+}
+.green{
+    color: #03A30A;
+    font-weight: bold;
+}
+.yellow{
+    color: #F28927;
+    font-weight: bold;
+}
+.red{
+    color: #EB5757;
+    font-weight: bold;
+}

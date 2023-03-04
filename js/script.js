@@ -18,7 +18,7 @@ const displayPhones = (systemData, dataLimit) =>{
     }
     
     systemData.forEach( system =>{
-        // console.log(system)
+        console.log(system)
         const features = system.features;
         const systemDetails = document.createElement('div');
         systemDetails.classList.add('col');
@@ -29,7 +29,7 @@ const displayPhones = (systemData, dataLimit) =>{
           <h5 class="card-title fw-bold">Features</h5>
           <div>
             <ol>
-                ${features.map(f =>`<li>${f}</li>`)}
+                ${features.map(f =>`<li>${f}</li>`).join('')}
             </ol>
           </div>
         </div>
@@ -84,17 +84,17 @@ const showSystemDetails = async (id) =>{
     const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data.data);
     loader(false);
     displaySystemDetails(data.data);
 }
 
 const displaySystemDetails = system =>{
-    console.log(system.features[1].feature_name);
     const modalBody = document.getElementById('modal-body');
     modalBody.innerHTML = '';
     const div = document.createElement('div');
     div.classList.add('d-flex');
+    div.classList.add('flex-column-reverse');
+    div.classList.add('flex-md-row');
     div.classList.add('justify-content-around');
     div.classList.add('align-items-center');
     div.classList.add('py-3');
